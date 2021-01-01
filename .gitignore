@@ -1,4 +1,8 @@
-#Maven
+# Project
+.*.properties
+temp/
+
+# Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
