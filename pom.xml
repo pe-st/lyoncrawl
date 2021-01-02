@@ -6,18 +6,32 @@
     <artifactId>lyon-crawl</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <properties>
-        <surefire-plugin.version>2.22.1</surefire-plugin.version>
-        <maven.compiler.target>11</maven.compiler.target>
-        <quarkus.platform.version>1.10.5.Final</quarkus.platform.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
+        <!-- project settings -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.parameters>true</maven.compiler.parameters>
-        <quarkus-plugin.version>1.10.5.Final</quarkus-plugin.version>
+
+        <!-- apache maven plugin versions (in alphabetical order) -->
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
+        <surefire-plugin.version>2.22.1</surefire-plugin.version>
+
+        <!-- quarkus properties -->
+        <quarkus.platform.version>1.10.5.Final</quarkus.platform.version>
+        <quarkus-plugin.version>1.10.5.Final</quarkus-plugin.version>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+        <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
+
+        <!-- artifact versions -->
+        <lombok.version>1.18.16</lombok.version>
+
+        <!-- testing artifact versions -->
+        <json.unit.version>2.22.0</json.unit.version>
+        <wiremock.version>2.27.2</wiremock.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -29,6 +43,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -46,17 +61,34 @@
             <groupId>org.jboss.slf4j</groupId>
             <artifactId>slf4j-jboss-logmanager</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- testing -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
+            <groupId>net.javacrumbs.json-unit</groupId>
+            <artifactId>json-unit-assertj</artifactId>
+            <version>${json.unit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <scope>test</scope>
+            <version>${wiremock.version}</version>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

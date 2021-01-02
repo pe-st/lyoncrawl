@@ -3,6 +3,7 @@ package ch.schlau.pesche.lyoncrawl;
 import static ch.schlau.pesche.lyoncrawl.Main.APP_NAME;
 
 import java.io.File;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public class Main implements Runnable, QuarkusApplication {
     String password;
 
     @CommandLine.Option(names = { "--baseurl" }, description = "Base URL of the confluence site. Default from dot file: ${DEFAULT-VALUE}")
-    String baseurl;
+    URL baseurl;
 
     @Inject
     CommandLine.IFactory factory;
@@ -39,7 +40,11 @@ public class Main implements Runnable, QuarkusApplication {
     @Override
     public void run() {
         // business logic
-        System.out.printf("Hello %s:%s %s%n", user, password, baseurl);
+        //        System.out.printf("Hello %s:%s %s%n", user, password, baseurl);
+        String authorization = ContentServiceClient.basicAuth(user, password);
+        ContentServiceClient lyon = new ContentServiceClient(baseurl, authorization);
+        String jsonString = lyon.getManyAsString("LYON");
+        System.out.println(jsonString);
     }
 
     @Override
